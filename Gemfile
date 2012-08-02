@@ -13,10 +13,10 @@ gem 'jqgrid_for_rails'
 
 gem 'therubyracer'
 gem 'execjs'
-gem 'thin'
+#gem 'thin'
 
 gem 'bootstrap-sass', '2.0.0'
-gem 'bcrypt-ruby', '3.0.1'
+#gem 'bcrypt-ruby', '3.0.1'
 
 gem "authlogic"
 
