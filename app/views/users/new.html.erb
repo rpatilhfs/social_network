@@ -1,2 +1,26 @@
-<h1>Sign Up</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+
+<h1>Sign up</h1>
+
+<div class="row" style="">
+	<div class="span6 offset3">
+		
+		<form accept-charset="UTF-8" action="/users	" class="new_user" id="new_user" method="post">
+		<%= render 'shared/error_messages' %>
+		
+		  <label for="user_name">Name</label>
+		  <input id="user_name" name="user[name]" size="30" type="text" />
+		
+		  <label for="user_email">Email</label>
+		  <input id="user_email" name="user[email]" size="30" type="text" />
+		
+		  <label for="user_password">Password</label>
+		  <input id="user_password" name="user[password]" size="30" type="password" />
+		
+		  <label for="user_password_confirmation">Confirmation</label>
+		  <input id="user_password_confirmation" name="user[password_confirmation]" size="30" type="password" />
+		
+		  <input class="btn btn-large btn-primary" name="commit" type="submit" value="Create my account" />
+		</form>
+
+  	</div>
+</div>

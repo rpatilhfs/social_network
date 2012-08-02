@@ -1,5 +1,7 @@
 SocialNetwork::Application.routes.draw do
-  get "users/new"
+  #get "users/new"
+  
+  resources :users
 
   get "home/index"
   get " home/help"
