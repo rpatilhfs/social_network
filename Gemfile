@@ -7,7 +7,7 @@ gem 'rails', '3.2.5'
 
 #gem 'mysql2'
 
-gem 'sqlite3'
+gem 'pg'
 
 gem 'jqgrid_for_rails'
 
