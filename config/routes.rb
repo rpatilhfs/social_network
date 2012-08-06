@@ -1,7 +1,10 @@
 SocialNetwork::Application.routes.draw do
-  #get "users/new"
   
-  resources :users
+  get "dashboards/index"
+  get "users/new"
+  
+  #resources :dashboards
+  #resources :users
 
   get "home/index"
   get " home/help"
@@ -12,7 +15,21 @@ SocialNetwork::Application.routes.draw do
   match '/Help',    to: 'home#help'
   match '/About',    to: 'home#about'
   match '/Contact',    to: 'home#contact'
+  
+  
+  
+  #resources :sessions, only: [:new, :create, :destroy]
+  resources :user_sessions#, only: [:new, :create, :destroy]
+  #get "user_sessions/new"
+  #post "user_sessions/create"
+  #get "user_sessions/destroy"
+  
+
   match '/SignUp',  to: 'users#new'
+  match '/SignIn',  to: 'user_sessions#new'
+  match '/SignOut', to: 'user_sessions#destroy'
+  match '/Dashboard', to: 'dashboards#index'
+  
   
   root :to => "home#index"
 

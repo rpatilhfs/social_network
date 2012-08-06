@@ -1,16 +1,32 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "HEADfitted Solutions", root_path, id: "logo" %>
+      <%= link_to "SOCIAL NETWORK", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Home",    '/Index' %></li>
-          <li><%= link_to "About",   '/About' %></li>
-          <li><%= link_to "Help",    '/Help' %></li>
-          <li><%= link_to "Contact", '/Contact' %></li>
-          <li><%= link_to "Sign in", '/SignUp' %></li>
+          <li><%= link_to "Home", '/Index' %></li>
+          <li><%= link_to "About", '/About' %></li>
+          <% if session[:current_user].present? %>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" onmousemove="$('.dropdown-menu').css('display','block');" >
+                Account <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Profile", '#' %></li>
+                <li><%= link_to "Settings", '#' %></li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "Sign out", '/SignOut', method: "delete" %>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "Sign in", '/SignIn' %></li>
+          <% end %>
         </ul>
       </nav>
     </div>
   </div>
 </header>
+
+
