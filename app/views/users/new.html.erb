@@ -1,11 +1,11 @@
-
 <h1>Sign Up</h1>
 
 <div class="row" style="">
-	<div class="span6 offset3">
-		
-		<form accept-charset="UTF-8" action="/users	" class="new_user" id="new_user" method="post">
+	<div class="span6 offset3">		
+		<form accept-charset="UTF-8" action="/users	" class="" id="CreateUser" method="post">
 		<%= render 'shared/error_messages' %>
+		<%= render 'shared/error_messages_javascript' %>
+		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token.to_s%>">   
 		
 		  <label for="user_name">Name</label>
 		  <input id="user_name" name="user[name]" size="30" type="text" />
@@ -21,6 +21,44 @@
 		
 		  <input class="btn btn-large btn-primary" name="commit" type="submit" value="Create my account" />
 		</form>
-
   	</div>
 </div>
+
+
+<script type="text/javascript">
+	$('#CreateUser').submit(function() {
+		var hasError = false;
+		emptyErrorBox();
+		var alertMessage = "";
+			
+		var username = $('#user_name').val();
+		var email = $('#user_email').val();
+		var password = $('#user_password').val();
+		var password_confirmation = $('#user_password_confirmation').val();
+		
+		var validUsername = NullEmptyLengthCount(username);
+		var validEmailLength = NullEmptyLengthCount(email);
+		var validPassword = NullEmptyLengthCount(password);
+		var validPasswordConfirmation = NullEmptyLengthCount(password_confirmation);
+		
+		if ( !validUsername  || !validEmailLength || !validPassword || !validPasswordConfirmation ){
+	    	alertMessage = 'Please fill the empty textboxes.';
+	    	showErrorMessageBlockForWholeEmptyBoxes(alertMessage);
+	    	onFocusFirstTextbox();
+	    	hasError = true;
+		}
+	    else if(!validateEmail(email)) {
+	    	alertMessage = 'Enter a valid email address.';
+	    	showErrorMessageBlockForWholeEmptyBoxes(alertMessage);
+			hasError = true;
+	    }
+	    else if(password != password_confirmation ) {
+	    	alertMessage = 'Both password are different.';
+	    	showErrorMessageBlockForWholeEmptyBoxes(alertMessage);
+			hasError = true;
+	    }
+		
+		if(hasError == true) { return false; }
+		return true;
+	});
+</script>

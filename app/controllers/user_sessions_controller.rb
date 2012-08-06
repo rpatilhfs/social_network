@@ -1,6 +1,7 @@
 class UserSessionsController < ApplicationController
 
-  #before_filter :require_admin, :only => :destroy
+  before_filter :require_login, :only => :destroy
+  #before_filter :require_login, :except=>[:new, :create]
 
   def new
     @user_session = UserSession.new
