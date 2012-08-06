@@ -1,0 +1,29 @@
+<h1>Profile</h1>
+
+<div class="row">
+	<%= render 'shared/error_messages' %>
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>, <%= @user.email %>
+        
+      </h1>
+      <a href="http://gravatar.com/emails">change</a>
+    </section>
+  </aside>
+
+  <div class="span6 offset1">
+
+	      <label for="user_name">Name</label>
+	      <input id="user_name" name="user[name]" size="30" type="text" value="<%=@user.name %>" readonly='readonly'/>
+	
+	      <label for="user_email">Email</label>
+	      <input id="user_email" name="user[email]" size="30" type="text" value="<%=@user.email %>" readonly='readonly' />
+		<p>
+			<a class="btn btn-primary btn-large" href="/ManageProfile">Update Profile »</a>
+		</p>
+  </div>
+  
+  
+</div>

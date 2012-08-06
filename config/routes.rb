@@ -1,10 +1,14 @@
 SocialNetwork::Application.routes.draw do
   
   get "dashboards/index"
-  get "users/new"
+  get "dashboards/profile"
+  
+  #get "users/new"
   
   #resources :dashboards
-  #resources :users
+  resources :users do
+    post "users/update_profile"
+  end
 
   get "home/index"
   get " home/help"
@@ -29,6 +33,10 @@ SocialNetwork::Application.routes.draw do
   match '/SignIn',  to: 'user_sessions#new'
   match '/SignOut', to: 'user_sessions#destroy'
   match '/Dashboard', to: 'dashboards#index'
+  match '/Profile', to: 'dashboards#profile'
+  match '/ManageProfile', to: 'users#edit'
+  match '/UpdateProfile', to: 'users#update_profile'
+  
   
   
   root :to => "home#index"

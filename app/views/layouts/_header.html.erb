@@ -4,16 +4,16 @@
       <%= link_to "SOCIAL NETWORK", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Home", '/Index' %></li>
-          <li><%= link_to "About", '/About' %></li>
           <% if session[:current_user].present? %>
-            <li id="fat-menu" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" onmousemove="$('.dropdown-menu').css('display','block');" >
+			<li><%= link_to "Dashboard", '/Dashboard' %></li>
+          
+            <li id="fat-menu" class="dropdown" onmouseover="$('.dropdown-menu').css('display','block');" onmouseout="$('.dropdown-menu').css('display','none');">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
                 Account <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Profile", '#' %></li>
-                <li><%= link_to "Settings", '#' %></li>
+                <li><%= link_to "Profile", '/Profile' %></li>
+                <li><%= link_to "Settings", '/ManageProfile' %></li>
                 <li class="divider"></li>
                 <li>
                   <%= link_to "Sign out", '/SignOut', method: "delete" %>
@@ -21,6 +21,8 @@
               </ul>
             </li>
           <% else %>
+            <li><%= link_to "Home", '/Index' %></li>
+	        <li><%= link_to "About", '/About' %></li>
             <li><%= link_to "Sign in", '/SignIn' %></li>
           <% end %>
         </ul>
@@ -28,5 +30,3 @@
     </div>
   </div>
 </header>
-
-
