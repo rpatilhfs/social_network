@@ -22,12 +22,17 @@
     </div>
     <div id="fb-root"></div>
     <script>
-	  function sign_out(){
-	    FB.logout(function(response) {
-	      // user is now logged out 
-	      window.location='/SignOut'   
-	    });
-	  }
+		function sign_out(){
+			try {
+				FB.logout(function(response) {
+			      	// window.location='/SignOut'   
+			    });
+			}
+			catch(e) {}
+			finally {
+				window.location='/SignOut'
+			}
+	    }
     </script>
   </body>
 </html>
