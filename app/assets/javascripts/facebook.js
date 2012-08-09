@@ -19,10 +19,5 @@
      ref.parentNode.insertBefore(js, ref);
    }(document));
    
-  function sign_out(){
-    FB.logout(function(response) {
-      // user is now logged out 
-      window.location='/SignOut'    
-    });
-  }
+
    

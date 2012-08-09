@@ -21,5 +21,13 @@
       <% if false %><%= debug(params) if Rails.env.development? %><% end %>
     </div>
     <div id="fb-root"></div>
+    <script>
+	  function sign_out(){
+	    FB.logout(function(response) {
+	      // user is now logged out 
+	      window.location='/SignOut'   
+	    });
+	  }
+    </script>
   </body>
 </html>

@@ -5,11 +5,11 @@ class DashboardsController < ApplicationController
   before_filter :require_login
   
   def index
-    @user = User.find(gerCurrentUserID)
+    @user = User.find(session[:current_user_id])
   end
   
   def profile
-    @user = User.find(gerCurrentUserID)
+    @user = User.find(session[:current_user_id])
   end
   
 end

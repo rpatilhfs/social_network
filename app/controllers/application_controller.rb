@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   
 
-  def gerCurrentUser
+  def getCurrentUser
     return session[:current_user]
   end
   
-  def gerCurrentUserID
+  def getCurrentUserID
     return session[:current_user_id]
   end
   
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 private
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.find(session[:current_user_id]) if session[:current_user_id]
   end
   
   def require_login
@@ -50,7 +50,7 @@ private
   # Note that this is not common in Ruby and is discouraged unless you
   # really mean to convert something into true or false.
   def logged_in?
-    !!gerCurrentUser
+    !!getCurrentUser
   end  
   
 end

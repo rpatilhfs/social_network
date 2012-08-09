@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
     auth = Authorization.find_or_create(auth_hash)
     session[:current_user_id] = auth
     session[:current_user] = User.find(auth)
+    session[:facebook_signout] = true
     flash[:notice] = "Login successful!"
     redirect_to '/Dashboard'
     return
