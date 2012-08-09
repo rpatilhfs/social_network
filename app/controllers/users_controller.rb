@@ -46,10 +46,18 @@ class UsersController < ApplicationController
       @user_update = User.update(id, :name => params[:user][:name], :email => params[:user][:email], :password => password, :password_confirmation => password )
     end
     
-    flash[:success] = "Error Occured"
+    flash[:success] = "Error Occured."
     flash[:success] = "Profile successfully updated." if @user_update
     redirect_to '/Profile'
     return
+  end
+  
+  def update_email_address
+    @user = User.find(session[:current_user].id)
+    @user.email = params[:email]
+    @user.save
+    #flash[:success] = "Email address successfully updated." if @user.save
+    render :nothing => true
   end
   
 end

@@ -1,13 +1,25 @@
 SocialNetwork::Application.routes.draw do
   
+  #get "sessions/new"
+  #get "sessions/create"
+  #get "sessions/failure"
+
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#failure'
+  #get   '/login', :to => 'sessions#new', :as => :login  
+  
+  # Twitter
+  #match "auth/:provider/callback" => "tsessions#create"
+  #match 'auth/failure', to: redirect('/')
+  #match 'signout', to: 'sessions#destroy', as: 'signout'
+  
   get "dashboards/index"
   get "dashboards/profile"
-  
-  #get "users/new"
   
   #resources :dashboards
   resources :users do
     post "users/update_profile"
+    post "users/update_email_address"
   end
 
   get "home/index"
@@ -20,15 +32,9 @@ SocialNetwork::Application.routes.draw do
   match '/About',    to: 'home#about'
   match '/Contact',    to: 'home#contact'
   
-  
-  
   #resources :sessions, only: [:new, :create, :destroy]
   resources :user_sessions#, only: [:new, :create, :destroy]
-  #get "user_sessions/new"
-  #post "user_sessions/create"
-  #get "user_sessions/destroy"
   
-
   match '/SignUp',  to: 'users#new'
   match '/SignIn',  to: 'user_sessions#new'
   match '/SignOut', to: 'user_sessions#destroy'
@@ -36,8 +42,7 @@ SocialNetwork::Application.routes.draw do
   match '/Profile', to: 'dashboards#profile'
   match '/ManageProfile', to: 'users#edit'
   match '/UpdateProfile', to: 'users#update_profile'
-  
-  
+  match '/UpdateEmailAddress', to: 'users#update_email_address'
   
   root :to => "home#index"
 

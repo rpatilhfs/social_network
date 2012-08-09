@@ -5,15 +5,15 @@ gem 'rails', '3.2.5'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-#gem 'mysql2'
+gem 'mysql2'
 
-gem 'pg'
+#gem 'pg'
 
 gem 'jqgrid_for_rails'
 
 gem 'therubyracer'
 gem 'execjs'
-#gem 'thin'
+gem 'thin'
 
 gem 'bootstrap-sass', '2.0.0'
 #gem 'bcrypt-ruby', '3.0.1'
@@ -34,6 +34,11 @@ end
 
 gem 'jquery-rails'
 
+#gem 'omniauth'
+#gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -49,7 +54,7 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-#gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
-#gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
-#gem 'ruby-debug19'
+gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
+gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
+gem 'ruby-debug19'
 

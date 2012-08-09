@@ -16,7 +16,10 @@
                 <li><%= link_to "Settings", '/ManageProfile' %></li>
                 <li class="divider"></li>
                 <li>
+                  <a href="#" onclick="sign_out();">Sign out</a>
+                  <% if false %>
                   <%= link_to "Sign out", '/SignOut', method: "delete" %>
+                  <% end %>
                 </li>
               </ul>
             </li>

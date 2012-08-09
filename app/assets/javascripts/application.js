@@ -19,12 +19,13 @@
 function onFocusFirstTextbox(){  $('input[tabindex=1]').focus(); }
 
 // Email Validate
-function validateEmail(elementValue){  
+function validateEmail(elementValue, message_div){  
   var emailPattern =/^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})/;
-  //var emailPattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-  //var emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //alert(elementValue);
-  return emailPattern.test(elementValue);
+  //return emailPattern.test(elementValue);
+  //alert('validateEmail');
+  if (emailPattern.test(elementValue) == FALSE ){
+	ShowError(ERROR_MSG_VALID_EMAIL_ADDRESS, message_div);
+  }
 }
 
 // DateForamt Validate
@@ -33,9 +34,38 @@ function validateDateFormat(elementValue){
   return dtRegex.test(elementValue);
 }
 
-function NullEmptyLengthCount(element){
-	return (element != null && element != "" && element.length != 0)? true : false;
+
+function NullEmptyLengthCount(element, message_div){
+	//alert('NullEmptyLengthCount');
+	if ((element != null && element != "" && element.length != 0) == FALSE ){
+		ShowError(ERROR_MSG_EMPTY_TEXTBOXES, message_div);
+	}
 }
+
+function ShowError(message, message_div){
+	// Form DIV
+	//alert("MESSAGE:"+message);
+	if (message_div == ALERT_MESSAGE_BOX_FORM_DIV){
+		emptyErrorBox();
+    	showErrorMessageBlockForWholeEmptyBoxes(message);
+	}
+	// MODAL BOX
+	if (message_div == ALERT_MESSAGE_BOX_MODAL_DIV){
+		emptyErrorBoxForModal();
+    	showErrorMessageBlockForModal(message);
+	}
+	//onFocusFirstTextbox();
+	//alert('show-end');
+	//for (i=0;i<2;i++){
+		//if (i==1){
+			//alert(i);
+	  //  	break;
+	    	//
+	    //}
+	//}
+	//return false;
+}
+
 
 function showErrorMessageBlockForWholeEmptyBoxes(alertMessage){
 	$("#error_explanation_javascript").show();
@@ -45,4 +75,14 @@ function showErrorMessageBlockForWholeEmptyBoxes(alertMessage){
 function emptyErrorBox(){
 	$("#error_message_block").text("");	
 	$("#error_explanation_javascript").hide();	
+}
+
+function showErrorMessageBlockForModal(alertMessage){
+	$("#error_explanation_javascript_modal").show();
+	$("#error_message_block_modal").append(alertMessage);
+}
+
+function emptyErrorBoxForModal(){
+	$("#error_message_block_modal").text("");	
+	$("#error_explanation_javascript_modal").hide();	
 }

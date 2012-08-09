@@ -2,12 +2,15 @@
 <h1>Update your profile</h1>
 
 <div class="row">
-
-  <div class="span2 offset1">
-    <%= gravatar_for @user %><br/>
-    <a href="http://gravatar.com/emails">change</a>
-  </div>
-
+	<div class="span3 offset1">
+	    <p>
+	    <%= gravatar_for @user %><br/>
+	    <a href="http://gravatar.com/emails">change</a><br/><br/><br/>
+	    </p>
+	    <p>
+	    	<a class="btn btn-large btn-primary" data-toggle="modal" href="#myModal" >Update Email Address</a>
+	    </p>
+  	</div>
 
   <div class="span6 offset1">
     <form accept-charset="UTF-8" action="/UpdateProfile" method="post">
@@ -18,7 +21,7 @@
 	      <input id="user_name" name="user[name]" size="30" type="text" value="<%=@user.name %>" />
 	
 	      <label for="user_email">Email</label>
-	      <input id="user_email" name="user[email]" size="30" type="text" value="<%=@user.email %>" />
+	      <input id="user_email" name="user[email]" size="30" type="text" value="<%=@user.email %>" readonly="readonly"	 />
 	
 	      <label for="user_password">Password</label>
 	      <input id="user_password" name="user[password]" size="30" type="password" />
@@ -32,3 +35,76 @@
   
   
 </div>
+
+<div class="modal hide fade" id="myModal" name="update_user_email">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		<%=render 'shared/error_messages_javascript_modal' %>		
+		<h3>Update Email Address</h3>
+	</div>
+	<div class="modal-body">
+		<p><input id="update_email" name="user[email]" size="30" type="text" value="<%=@user.email %>"/></p>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<btn class="btn btn-primary" type="submit" onclick="update_email_address('update_email');">Save changes</btn>
+	</div>
+</div>
+
+<script>
+	$(function() {
+		$('#myModal').modal('show')
+	});
+</script>
+
+<script type="text/javascript">
+
+function update_email_address(email_address){
+	var email = $('#'+email_address).val();
+	NullEmptyLengthCount(email, ALERT_MESSAGE_BOX_MODAL_DIV);
+	validateEmail(email, ALERT_MESSAGE_BOX_MODAL_DIV);
+	submit_values();	
+}
+
+function submit_values(){
+	// ====================
+	// = Setting defaults =
+	// ====================
+	// CSRF Issue For Non_GET Request Method, Avoid Access Of Token
+	var token = $("meta[name='csrf-token']").attr("content");
+	//alert('token='+token);
+	$.ajaxSetup({  
+		'beforeSend': function(xhr) { xhr.setRequestHeader("Accept", "text/javascript"); xhr.setRequestHeader("X-CSRF-Token", token); }
+	})
+	url='/UpdateEmailAddress/?email='+$('#update_email').val();           
+  	$.ajax({
+       type: "PUT",
+       dataType: "script",
+       url: url,
+       beforeSend: function(xhr){
+         xhr.setRequestHeader("Accept", "text/javascript")
+         xhr.setRequestHeader("X-CSRF-Token", token);
+       },
+       //complete: function(){
+       //  alert('Complete');
+         //$("#edit_"+target+" span:contains('Updating...')").remove();
+       //},
+       error: function(data){
+         //var error_obj=jQuery.parseJSON(data.responseText);
+         //alert('Error='+dump_object(error_obj).dump);
+       	alertMessage = "ERROR";
+       	showErrorMessageBlockForModal(alertMessage);
+
+       }, 
+       success: function(data){
+       	$('#user_email').val($('#update_email').val());
+       	alertMessage = "Email address successfully updated";
+       	showErrorMessageBlockForModal(alertMessage);
+       }
+  });
+  return false; 
+}
+	
+	
+	
+</script>

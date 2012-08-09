@@ -3,15 +3,20 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   #include SessionsHelper
   
-  #before_filter :require_login
+  # TwitterLogin
+  helper_method :current_user
   
-  
+
   def gerCurrentUser
     return session[:current_user]
   end
   
+  def gerCurrentUserID
+    return session[:current_user_id]
+  end
+  
   def login_required
-    if session[:current_user].present?
+    if session[:current_user_id].present?
       #redirect_to '/Dashboard'
     else
       reset_session
@@ -20,8 +25,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def generate_random_password
+    collection_element = [('a'..'z'),('A'..'Z'),('0'..'9')].map{|i| i.to_a}.flatten
+    return (0..7).map{ collection_element[rand(collection_element.length)] }.join
+  end
+
+
 private
- 
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  
   def require_login
     unless logged_in?
       flash[:error] = "You must be logged in to access this section"
