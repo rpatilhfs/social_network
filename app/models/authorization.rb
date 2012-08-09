@@ -10,7 +10,8 @@ class Authorization < ActiveRecord::Base
     @user_exist = User.find_by_email(email)
     
     if @user_exist.nil?
-      password = generate_random_password
+      #password = generate_random_password
+      password = '123456'
       @user_create = User.create :name => auth_hash["info"]["name"], :email => auth_hash["info"]["email"], :password => password, :password_confirmation => password
       @user = @user_create.id
     else
