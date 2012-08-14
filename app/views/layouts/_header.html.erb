@@ -14,12 +14,30 @@
               <ul class="dropdown-menu">
                 <li><%= link_to "Profile", '/Profile' %></li>
                 <li><%= link_to "Settings", '/ManageProfile' %></li>
+              	<li>
+					<a href="/ManageProfile">
+						<i class="icon-cog icon-black"></i>&nbsp;&nbsp;
+						Settings
+					</a>
+				</li>
+                
                 <li class="divider"></li>
                 <li>
             	  <% if session[:facebook_signout].present? %>
                 	<a href="#" onclick="sign_out();">Sign out</a>
                   <% else %>
-                  	<%= link_to "Sign out", '/SignOut', method: "delete" %>
+                	<li>
+						<a rel="nofollow" data-method="delete" href="/SignOut">
+							<i class="icon-trash icon-black"></i>&nbsp;&nbsp;
+							Sign Out
+						</a>
+					</li>
+					<% if false %>
+						<%= link_to "Remove Cookies", '/RemoveCookies' %>
+						<%= link_to "Sign out", '/SignOut', method: "delete" %>
+					<% end %>
+                  	
+                  	
                   <% end %>
                 </li>
               </ul>
@@ -34,3 +52,4 @@
     </div>
   </div>
 </header>
+

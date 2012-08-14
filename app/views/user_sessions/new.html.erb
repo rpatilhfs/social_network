@@ -1,91 +1,70 @@
-<h1>Sign In</h1>
+<h1>
+	Sign In
+	<% if false %>
+		<%=cookies[:email]%> :: <%=cookies[:remembrance_token] %>
+	<% end %>
+</h1>
 
+<% counter = 0 %>
 <div class="row">
 	
-	<div class="span4 offset">
-		<div>
-			<label for="Sign_In_with">Sign In with</label>
-		</div>
-		
-		<p>
-			<div class="outset-colored" style="width: 132%;">
-				<ul>
-					<li>
-						<a href="/auth/facebook" title="My Facebook Page" class="facebook">
-							<img src="/assets/sign_in_icon/facebook_white.png" alt="Facebook icon" />
-							<span class="site">Facebook</span>
-						</a>
-					</li>
-					<li>
-						<a title="My E-Mail" class="email" data-toggle="modal" href="#link_underconstruction">
-							<img src="/assets/sign_in_icon/gmail_white.png" alt="gmail icon" />
-							<span class="site">E-Mail</span>
-						</a>
-					</li>
-					<li>
-						<a data-toggle="modal" href="#link_underconstruction"title="My LinkedIn Page" class="linkedin">
-							<img src="/assets/sign_in_icon/linkedin_white.png" alt="LinkedIn icon" />
-							<span class="site">LinkedIn</span>
-						</a>
-					</li>
-					<li>
-						<a data-toggle="modal" href="#link_underconstruction" title="My Twitter Page" class="twitter">
-							<img src="/assets/sign_in_icon/twitter_white.png" alt="Twitter icon" />
-							<span class="site">Twitter</span>
-						</a>
-					</li>
-					<li>
-						<a data-toggle="modal" href="#link_underconstruction" title="My Flickr Page" class="flickr">
-							<img src="/assets/sign_in_icon/flickr_white.png" alt="Flickr icon" />
-							<span class="site">Flickr</span>
-						</a>
-					</li>
-				</ul>
+	<div class="span4 offset0" style="border: 5px solid #F4F4F4; height: 410px;border-radius: 5px 5px 5px 5px;padding: 22px;">
+		<section>
+	      	<div>
+				<label for="Sign_In_with">Sign In with</label>
 			</div>
-		</p>
+	
+			<p style="padding: 0 25%;">
+				<a id="facebook" href="/auth/facebook" title="My Facebook Page" class="facebookIcno"></a><br/>
+				<a id="twitter" href="#link_underconstruction" title="My Twitter Page" data-toggle="modal" class="tweeterIcon"></a><br/>
+				<a id="linkedin" href="#link_underconstruction" title="My LinkedIn Page" data-toggle="modal" class="linkdnIcon"></a><br/>
+				<a id="google_account" href="#link_underconstruction" title="My E-Mail" data-toggle="modal" class="googleIcon"></a>
+			</p>		
+	    </section>
   	</div>
-
 
 	<div class="span1 offset1">
-		<div style="height:400px;width:0px;border:1px solid #252525;"></div>
+		<div style="height:461px;width:0px;border:1px solid #252525;"></div>
   	</div>
-  		
+  	
 	
-	<div class="span4 offset">
+	<div class="span4 offset0" style="border: 5px solid #F4F4F4; height: 410px;border-radius: 5px 5px 5px 5px;padding: 22px;">
+  		<% if cookies[:email].present? %>
+  			<%=cookies[:email] %> user is already signed in. Do you want to continute. <br/> <br/>
+  			<div id="buttons" style="text-align: right;">
+				<a class="btn btn-success" onclick="checkAnyCookie();">
+					<i class="icon-ok icon-white"></i>
+					Continue
+				</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	  			<a class="btn btn-danger" href="/RemoveCookies">
+					<i class="icon-trash icon-white"></i>
+					Sign Out
+				</a>
+			</div>
+  		<hr/>
+		<% end %>
+		
+		
 		<form accept-charset="UTF-8" action="/user_sessions" method="post">
 			<div>
 			    <label for="session_email">Email</label>
-			    <input id="session_email" name="users_sessions[email]" size="30" type="text" />
+			    <input id="session_email" name="users_sessions[email]" size="30" type="text" tabindex="<%=counter = counter+1 %>" />
 			</div>
 			<div>
 				<label for="session_password">Password</label>
-				<input id="session_password" name="users_sessions[password]" size="30" type="password" />
+				<input id="session_password" name="users_sessions[password]" size="30" type="password"  tabindex="<%=counter = counter+1 %>" />
 			</div>
-  			<input class="btn btn-large btn-primary" name="commit" type="submit" value="Sign in" />
-  			
+			<div>
+				<input name="remember_me" type="hidden" value="0" />
+    			<input type="checkbox" name="remember_me" id="remember_me" value="1" tabindex="<%=counter = counter+1 %>" />
+				<label for="remember_me" style="float: right; padding-right: 63%;">Remember me</label>
+			</div>
+			<div>
+				<input class="btn btn-large btn-primary" name="commit" type="submit" value="Sign in" tabindex="<%=counter = counter+1 %>" />
+  			</div>
 		</form>
-		
-		<p>New user? <%= link_to "Sign up now!", '/SignUp' %></p>
+		<% counter = counter + 1%>
+		<p>New user? <%= link_to "Sign up now!", '/SignUp', :tabindex=> counter %></p>
 
   	</div>
-</div>
-
-
-<div class="modal hide fade" id="link_underconstruction" name="link_underconstruction">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3>Unders Construction</h3>
-	</div>
-	<div class="modal-body">
-		<p style="text-align: center;">Respected link is underconstruction</p>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a>
-	</div>
-</div>
-
-<script>
-	$(function() {
-		$('#link_underconstruction').modal('show')
-	});
-</script>
+</div>	

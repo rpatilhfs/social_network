@@ -4,11 +4,9 @@ class User < ActiveRecord::Base
   acts_as_authentic
   
   #has_secure_password
-
   #before_save { |user| user.email = email.downcase }
   
-  before_save :create_remember_token
-  
+  before_save :create_remember_token  
   
   def self.create_with_omniauth(auth)
     create! do |user|
@@ -44,11 +42,30 @@ class User < ActiveRecord::Base
 
   ######################################################
 
+  ######################################################
+  # OPEN ID
+=begin
+  acts_as_authentic do |c|
+    c.openid_required_fields = [:nickname, :email]
+  end
+=end  
+  ######################################################
 
   
   private
     def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64
     end
+    
+    
+  #######################################################
+  # OPEN ID
+=begin  
+  def map_openid_registration(registration)
+    self.email = registration["email"] if email.blank?
+    self.username = registration["nickname"] if username.blank?
+  end
+=end  
+  #######################################################
   
 end

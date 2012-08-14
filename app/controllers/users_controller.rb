@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :require_login, :except=>[:new, :create]
+  before_filter :require_login, :except=>[:new, :create, :registration_success, :signout_completely]
 
   def new
     @user = User.new
@@ -19,14 +19,18 @@ class UsersController < ApplicationController
     @user.password_confirmation = password_confirmation
     
     if @user.save
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      flash[:success] = "Registration done successfully. Please login again !!"      
+      Mailer.account_confirmation(email, name, GlobalConstants::MAIL_ACCOUNT_CONFIRMATION).deliver
+      Mailer.welcome_message(email, name, GlobalConstants::MAIL_WELCOME_MESSAGE).deliver
+      #redirect_to @user
+      #############################################################################################
+      session[:temperory_user_id] = @user.id
+      redirect_to '/RegistrationSuccess'
     else
       render 'new'
     end
   end
-
-
+  
   def show
     @user = User.find(params[:id])
   end
@@ -60,4 +64,34 @@ class UsersController < ApplicationController
     render :nothing => true
   end
   
+  def registration_success
+    #flash[:success] = "Registration done successfully. Please login again !!"      
+    @user = User.find(session[:temperory_user_id])
+  end
+  
+  def signout_completely
+    
+  end
+  
+  
 end
+
+=begin
+  def create
+    debugger
+    name = params[:user][:name].upcase!
+    email = params[:user][:email]
+    password = params[:user][:password]
+    password_confirmation = params[:user][:password_confirmation]
+    @user = User.new(params[:user])
+    @user.save do |result|
+      #if result
+        flash[:success] = "Welcome to the Sample App!"
+        UserMailer.registration_confirmation(@user).deliver
+        redirect_to @user
+      else
+        render :action => 'new'
+      end
+    end
+  end
+=end

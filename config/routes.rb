@@ -1,5 +1,11 @@
 SocialNetwork::Application.routes.draw do
   
+  get "openid_session/new"
+  match '/OpenIdLogin',    to: 'openid_session#new'
+
+  get "openid_session/create"
+  get "openid_session/problem"  
+
   #get "sessions/new"
   #get "sessions/create"
   #get "sessions/failure"
@@ -15,17 +21,29 @@ SocialNetwork::Application.routes.draw do
   
   get "dashboards/index"
   get "dashboards/profile"
+
+
+# Sample of named route:
+  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # This route can be invoked with purchase_url(:id => product.id)
+
   
   #resources :dashboards
   resources :users do
     post "users/update_profile"
     post "users/update_email_address"
+    get "users/registration_success"
+    get "users/signout_completely"
   end
 
-  get "home/index"
-  get " home/help"
-  get " home/about"
-  get " home/contact"
+  match '/RegistrationSuccess', to: 'users#registration_success'
+  
+  resources :home do
+    get "home/index"
+    get " home/help"
+    get " home/about"
+    get " home/contact"
+  end
   
   match '/Index',    to: 'home#index'
   match '/Help',    to: 'home#help'
@@ -33,16 +51,25 @@ SocialNetwork::Application.routes.draw do
   match '/Contact',    to: 'home#contact'
   
   #resources :sessions, only: [:new, :create, :destroy]
-  resources :user_sessions#, only: [:new, :create, :destroy]
+  resources :user_sessions do #, only: [:new, :create, :destroy]
+    post "user_sessions/signin_by_cookie"
+    get "user_sessions/remove_cookies"
+  end
   
   match '/SignUp',  to: 'users#new'
+  match '/ManageProfile', to: 'users#edit'
+  match '/UpdateProfile', to: 'users#update_profile'
+  match '/UpdateEmailAddress', to: 'users#update_email_address'
+  match '/SignOutCompletely', to: 'users#signout_completely'
+  
+  
   match '/SignIn',  to: 'user_sessions#new'
   match '/SignOut', to: 'user_sessions#destroy'
   match '/Dashboard', to: 'dashboards#index'
   match '/Profile', to: 'dashboards#profile'
-  match '/ManageProfile', to: 'users#edit'
-  match '/UpdateProfile', to: 'users#update_profile'
-  match '/UpdateEmailAddress', to: 'users#update_email_address'
+  match '/CheckCookieActiveForUser', to: 'user_sessions#signin_by_cookie'
+  match '/RemoveCookies', to: 'user_sessions#remove_cookies'
+  
   
   root :to => "home#index"
 

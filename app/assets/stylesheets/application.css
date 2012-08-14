@@ -11,3 +11,25 @@
  *= require_self
  *= require_tree .
  */
+
+.facebookIcno, .tweeterIcon, .linkdnIcon, .googleIcon {
+	background-image: url('/assets/logos.png');
+	background-repeat: no-repeat;
+	height:64px;
+	width:130px;
+	display:block;
+	/*
+	margin-right:10px;
+	float:left;
+	*/
+}
+
+a.facebookIcno { background-position:-132px 0px;}
+a.tweeterIcon { background-position:-264px 0px;}
+a.linkdnIcon { background-position:-398px 0px;}
+a.googleIcon { background-position:0px 0px;}
+
+a.facebookIcno:hover { background-position:-132px -66px;}
+a.tweeterIcon:hover { background-position:-264px -66px;}
+a.linkdnIcon:hover { background-position:-398px -66px;}
+a.googleIcon:hover { background-position:-0px -66px;}

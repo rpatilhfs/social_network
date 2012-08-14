@@ -33,5 +33,10 @@ SocialNetwork::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = true  
+  
+  #config.action_view.debug_rjs = false
+  
+  #config.action_controller.perform_caching = false
+  
 end

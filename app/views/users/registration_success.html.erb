@@ -1,0 +1,48 @@
+<div class="row">
+  <aside class="span4 offset1" style="border: 5px solid #F4F4F4; height: 356px;border-radius: 5px 5px 5px 5px;padding: 22px;">
+    <section>
+        <p>
+        Dear <%= @user.name %> ( <%= @user.email %> ),<br/>
+        You recently registered for DemoApp Headfitted. To confirm your social account and start using DemoApp Headfitted, 
+        confirm your email address.   
+        </p>
+      <hr/>
+    	<div>
+			<label for="Sign_In_with">Sign In</label>
+		</div>
+		
+		<div>
+			<input id="session_email" name="users_sessions[email]" size="30" type="text" placeholder="Username" />
+		</div>
+		<div>
+			<input id="session_password" name="users_sessions[password]" size="30" type="password" placeholder="Password" />
+		</div>
+		<div>
+			<input name="remember_me" type="hidden" value="0" />
+			<input type="checkbox" name="remember_me" tabindex="3" id="remember_me"/>
+			<label for="remember_me" style="float: right; padding-right: 63%;">Remember me</label>
+		</div>
+		<div>
+			<input class="btn btn-large btn-primary" name="commit" type="submit" value="Sign in" />
+		</div>
+
+
+    </section>
+  </aside>
+  
+  <aside class="span4 offset" style="border: 5px solid #F4F4F4; height: 356px;border-radius: 5px 5px 5px 5px;padding: 22px;">
+    <section>
+      	<div>
+			<label for="Sign_In_with">Sign In with</label>
+		</div>
+
+		<p style="padding: 0 25%;">
+			<a id="facebook" href="/auth/facebook" title="My Facebook Page" class="facebookIcno"></a><br/>
+			<a id="twitter" href="#link_underconstruction" title="My Twitter Page" data-toggle="modal" class="tweeterIcon"></a><br/>
+			<a id="linkedin" href="#link_underconstruction" title="My LinkedIn Page" data-toggle="modal" class="linkdnIcon"></a><br/>
+			<a id="google_account" href="#link_underconstruction" title="My E-Mail" data-toggle="modal" class="googleIcon"></a>
+		</p>		
+		
+    </section>
+  </aside>
+</div>
