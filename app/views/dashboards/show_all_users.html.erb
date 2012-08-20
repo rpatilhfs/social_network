@@ -1,0 +1,70 @@
+<script type="text/javascript">	
+	$(document).ready(function() {
+	  $(".gravatar").removeClass("gravatar").addClass("user_gravatar_small");
+	  $(".well").css("margin-bottom","5px");
+	});
+</script>
+
+<div class="row">
+	<%= render 'layouts/left_panel' %>
+
+	<div class="span10 offset0">
+		<div class="well main_div" style="margin-left: -15px;" >
+	        <% provide(:title, 'All users') %>
+			<h1>All users</h1>
+			<%= will_paginate %>
+
+			<ul class="users">
+			  <% @show_all_users.each do |user| %>
+			    <li>
+			      <%= gravatar_for user%>
+			      <%= link_to user.name, user %>
+			    </li>
+			  <% end %>
+			</ul>
+			<%= will_paginate %>
+
+	    </div>
+	</div>
+</div>
+
+
+<!-- 
+	
+	<div class="row">
+	
+
+    <ul class="nav nav-tabs">
+	    <li class="active">
+	    	<a href="#">Home</a>
+	    </li>
+	    <li><a href="#">...</a></li>
+	    <li><a href="#">...</a></li>
+    </ul>
+	
+	
+	
+</div>
+<div class="row">
+	
+    
+	<% provide(:title, 'All users') %>
+	<h1>All users</h1>
+	
+	<table>
+
+	
+	<ul class="users">
+	  <% @show_all_users.each do |user| %>
+	    <li>
+	      <%= gravatar_for user%>
+	      <%= link_to user.name, user %>
+	    </li>
+	  <% end %>
+	</ul>
+  
+  
+</div>
+
+
+-->

@@ -1,5 +1,54 @@
-<h1>Profile</h1>
+<script type="text/javascript">	
+	$(document).ready(function() {
+	  $(".gravatar").removeClass("gravatar").addClass("user_gravatar");
+	});
+</script>
 
+<div class="row">
+	
+	<%= render 'layouts/left_panel' %>
+	
+	<div class="span6 offset0">
+		<form class="well imageHeight" >
+	        <ul class="nav nav-pills">
+			    <li class="active">
+				    <a href="#">Share an Update</a>
+			    </li>
+			    <li><a href="#">Add a Doc/ Image</a></li>
+			    <li><a href="#">Post a Poll</a></li>
+			    <!-- -->
+	            <li id="fat-menu" class="dropdown" onmouseover="$('.more_option').css('display','block');" onmouseout="$('.more_option').css('display','none');">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+	                More <b class="caret"></b>
+	              </a>
+	              <ul class="dropdown-menu more_option" style="right: 0;">
+	              	<li>
+						<a href="#">
+							<i class="icon-cog icon-black"></i>&nbsp;&nbsp;
+							More 1
+						</a>
+					</li>
+	              	<li>
+						<a href="#">
+							<i class="icon-cog icon-black"></i>&nbsp;&nbsp;
+							More 2
+						</a>
+					</li>
+	              </ul>
+	            </li>
+	            <!-- -->
+		    </ul>
+	    </form>
+	    
+	</div>
+
+	<div class="span3 offset0">
+		<form class="well imageHeight">
+		    Find Friends
+	    </form>	    
+	</div>
+
+</div>
 <div class="row">
 	<%= render 'shared/error_messages' %>
   <aside class="span4">

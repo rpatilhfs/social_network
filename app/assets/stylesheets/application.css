@@ -33,3 +33,37 @@ a.facebookIcno:hover { background-position:-132px -66px;}
 a.tweeterIcon:hover { background-position:-264px -66px;}
 a.linkdnIcon:hover { background-position:-398px -66px;}
 a.googleIcon:hover { background-position:-0px -66px;}
+
+
+.imageHeight{
+	height: 200px;
+}
+.user_gravatar{
+	height: 125px;
+    padding-left: 5%;
+    width: 125px;
+}
+.user_gravatar_small{
+	height:80px;padding: 0px 25px;
+}
+
+.main_div{
+	height: 550px;
+}
+
+.user_detail{
+	color: #0A76B7;
+    font-size: 14px;
+    padding-left: 18%;
+}
+
+.invitation_input_box{
+	border-radius: 3px;
+	width: 110px;
+	height: 40px;
+	/*font-size: 11px;*/
+}
+
+.fontSize11{
+	font-size: 11px;
+}

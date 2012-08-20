@@ -18,24 +18,34 @@ SocialNetwork::Application.routes.draw do
   #match "auth/:provider/callback" => "tsessions#create"
   #match 'auth/failure', to: redirect('/')
   #match 'signout', to: 'sessions#destroy', as: 'signout'
+
+  resources :dashboards do
+    get "dashboards/index"
+    get "dashboards/profile"
+    get "dashboards/show_all_users"
+  end
   
-  get "dashboards/index"
-  get "dashboards/profile"
-
-
+  match '/Dashboard', to: 'dashboards#index'
+  match '/Profile', to: 'dashboards#profile'
+  match '/ShowAllUsers', to: 'dashboards#show_all_users'
+  
 # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
-
   
-  #resources :dashboards
   resources :users do
     post "users/update_profile"
     post "users/update_email_address"
     get "users/registration_success"
     get "users/signout_completely"
+    
   end
 
+  match '/SignUp',  to: 'users#new'
+  match '/ManageProfile', to: 'users#edit'
+  match '/UpdateProfile', to: 'users#update_profile'
+  match '/UpdateEmailAddress', to: 'users#update_email_address'
+  match '/SignOutCompletely', to: 'users#signout_completely'
   match '/RegistrationSuccess', to: 'users#registration_success'
   
   resources :home do
@@ -56,20 +66,10 @@ SocialNetwork::Application.routes.draw do
     get "user_sessions/remove_cookies"
   end
   
-  match '/SignUp',  to: 'users#new'
-  match '/ManageProfile', to: 'users#edit'
-  match '/UpdateProfile', to: 'users#update_profile'
-  match '/UpdateEmailAddress', to: 'users#update_email_address'
-  match '/SignOutCompletely', to: 'users#signout_completely'
-  
-  
   match '/SignIn',  to: 'user_sessions#new'
   match '/SignOut', to: 'user_sessions#destroy'
-  match '/Dashboard', to: 'dashboards#index'
-  match '/Profile', to: 'dashboards#profile'
   match '/CheckCookieActiveForUser', to: 'user_sessions#signin_by_cookie'
-  match '/RemoveCookies', to: 'user_sessions#remove_cookies'
-  
+  match '/RemoveCookies', to: 'user_sessions#remove_cookies'  
   
   root :to => "home#index"
 

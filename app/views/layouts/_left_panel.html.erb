@@ -1,0 +1,46 @@
+<script type="text/javascript">	
+	$(document).ready(function() {
+	  $(".gravatar").removeClass("gravatar").addClass("user_gravatar_small");
+	  $(".well").css("margin-bottom","5px");
+	});
+</script>
+
+<div class="span2">
+	<div style="padding: 8px 0;" class="well">
+    	<%= gravatar_for @user %>
+        <div class="user_detail" >
+        	<%= @user.name %>
+        </div>
+    </div>
+
+	<div style="padding: 8px 0;" class="well">
+        <ul class="nav nav-list">
+          <li class="nav-header">Favorites</li>
+          <li><a href="#link_underconstruction" data-toggle="modal"><i class="icon-home"></i> &nbsp;Home</a></li>
+          <li><a href="#link_underconstruction" data-toggle="modal"><i class="icon-envelope"></i> &nbsp;Messages</a></li>
+          <li><a href="#link_underconstruction" data-toggle="modal"><i class="icon-calendar"></i> &nbsp;Calendar </a></li>
+          <li><a href="#link_underconstruction" data-toggle="modal"><i class="icon-list"></i> &nbsp;TO DO List	</a></li>
+        </ul>
+	</div>
+	
+	<div style="padding: 8px 0;" class="well">
+        <ul class="nav nav-list">
+          <li class="nav-header">Application</li>
+          <li><a href="#link_underconstruction" data-toggle="modal"><i class="icon-picture"></i> &nbsp;Gallery</a></li>
+          <li><a href="#link_underconstruction" data-toggle="modal"><i class="icon-retweet"></i> &nbsp;Alerts</a></li>
+          <li><a href="#link_underconstruction" data-toggle="modal"><i class="icon-volume-up"></i> &nbsp;Notices</a></li>
+          <li><a href="#link_underconstruction" data-toggle="modal"><i class="icon-comment"></i> &nbsp;Comment</a></li>
+          <li><a href="#link_underconstruction" data-toggle="modal"><i class="icon-star"></i> &nbsp;Reputation</a></li>          
+        </ul>
+	</div>	    
+	<div style="padding: 8px 0;" class="well">
+        <ul class="nav nav-list">
+          <li class="nav-header">invite UR friend</li>
+			<input id="text" class="invitation_input_box" type="text">
+			<a class="btn btn-success" href="#" style="font-size: 11px;">
+				<i class="icon-check icon-white"></i>
+				Send Invitation
+			</a>
+        </ul>
+	</div>	    
+</div>
